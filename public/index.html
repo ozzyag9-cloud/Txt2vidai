@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Script to Video</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="masthead">
+      <span class="eyebrow">SCENE 1 OF N</span>
+      <h1>Script&nbsp;<span class="arrow">→</span>&nbsp;Video</h1>
+      <p class="sub">Paste a script. Get back a narrated 16:9 video, scene by scene, built from stock footage and an AI voiceover.</p>
+    </header>
+
+    <form id="generate-form" class="panel">
+      <label for="script">Script</label>
+      <textarea id="script" name="script" rows="9" maxlength="6000"
+        placeholder="Write your narration here. Each sentence (or small group of sentences) becomes one scene, matched with stock footage and read aloud."
+        required></textarea>
+      <div class="charcount"><span id="charcount">0</span> / 6000</div>
+
+      <div class="row">
+        <div class="field">
+          <label for="voiceId">ElevenLabs voice ID <span class="optional">(optional if set in .env)</span></label>
+          <input id="voiceId" name="voiceId" type="text" placeholder="e.g. 21m00Tcm4TlvDq8ikWAM" />
+        </div>
+        <div class="field field-toggle">
+          <label for="captions">Captions</label>
+          <label class="switch">
+            <input id="captions" name="captions" type="checkbox" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" id="submit-btn">Generate video</button>
+      <p class="hint">Voice IDs live in your ElevenLabs dashboard under Voices. Footage comes from Pexels and is credited below the video.</p>
+    </form>
+
+    <section id="status-panel" class="panel hidden">
+      <div class="filmstrip" id="filmstrip"></div>
+      <p id="status-message">Starting...</p>
+    </section>
+
+    <section id="result-panel" class="panel hidden">
+      <video id="result-video" controls></video>
+      <div class="result-actions">
+        <a id="download-link" href="#" download="video.mp4">Download .mp4</a>
+        <button type="button" id="reset-btn">Make another</button>
+      </div>
+      <details id="credits-block">
+        <summary>Footage credits</summary>
+        <ul id="credits-list"></ul>
+      </details>
+    </section>
+
+    <section id="error-panel" class="panel error hidden">
+      <p id="error-message"></p>
+      <button type="button" id="error-reset-btn">Try again</button>
+    </section>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
